@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.dao.IUserDao">
+    <insert id="addUser" parameterType="User">
+        insert into t_user(username, password, address, phone, email)
+        values (#{username}, #{password}, #{phone}, #{email})
+    </insert>
+
+    <update id="updateUser">
+        update t_user
+        set username=#{username},
+            password=#{password},
+            email=#{email}
+        where id = #{id};
+
+    </update>
+    <delete id="deleteUserById">
+        delete
+        from t_user
+        where id = #{userId};
+    </delete>
+
+    <select id="findUserById" resultType="com.tmall.pojo.User">
+        select *
+        from t_user
+        where id = #{userId}
+    </select>
+    <select id="finAllUsers" resultType="com.tmall.pojo.User">
+        select *
+        from t_user
+    </select>
+
+    <select id="findUserByNameAndPassword" resultType="com.tmall.pojo.User">
+        select *
+        from t_user
+        where password = #{password}
+          and username = #{username}
+    </select>
+
+    <select id="findUserByName" resultType="java.lang.Integer">
+        select count(*)
+        from t_user
+        where username = #{username}
+    </select>
+
+</mapper>

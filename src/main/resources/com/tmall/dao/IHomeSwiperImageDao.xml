@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.dao.IHomeSwiperImageDao">
+
+    <select id="getAllSwiperImages" resultType="com.tmall.pojo.HomeSwiperImage">
+        select id,src,produce_id produce from t_home_swiper_image
+    </select>
+</mapper>
