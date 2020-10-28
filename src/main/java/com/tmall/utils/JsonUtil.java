@@ -23,7 +23,7 @@ public class JsonUtil {
      * @Author Xlu
      * @Date 20:04 2020/10/2
      */
-    public static String getJson(Object obj) {
+    public static String getJsonStr(Object obj) {
         try {
             return mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
@@ -32,5 +32,7 @@ public class JsonUtil {
 
         }
     }
+
+
 
 }

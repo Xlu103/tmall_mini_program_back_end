@@ -44,17 +44,13 @@ public class HomeController {
     public String getSwiperData(HttpServletRequest req) {
         String serverName = req.getServerName();
         ArrayList<HomeSwiperImage> imageList = new ArrayList<>();
-
         List<HomeSwiperImage> allImages = swiperImageService.getAllImages();
-
         // 遍历结果，加上需要的头，添加到列表中
         for (HomeSwiperImage image : allImages) {
             image.setSrc("http://" + serverName + ":8080" + image.getSrc());
             imageList.add(image);
         }
-
-
-        return JsonUtil.getJson(imageList);
+        return JsonUtil.getJsonStr(imageList);
     }
 
     /**
@@ -70,14 +66,12 @@ public class HomeController {
         // 服务器链接
         String serverName = req.getServerName();
         ArrayList<HomeChunkData> list = new ArrayList<>();
-
         List<HomeChunkData> allChunkData = chunkDataService.getAllChunkData();
         for (HomeChunkData datum : allChunkData) {
             datum.setImgSrc("http://" + serverName + ":8080" + datum.getImgSrc());
             list.add(datum);
         }
-
-        return JsonUtil.getJson(list);
+        return JsonUtil.getJsonStr(list);
     }
 
     @RequestMapping("/video")
@@ -105,7 +99,7 @@ public class HomeController {
         list.add(map3);
         list.add(map4);
 
-        return JsonUtil.getJson(list);
+        return JsonUtil.getJsonStr(list);
     }
 
 }

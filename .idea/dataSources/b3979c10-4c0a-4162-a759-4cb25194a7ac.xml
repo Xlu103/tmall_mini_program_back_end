@@ -655,85 +655,95 @@
 </Comment>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="179" parent="144" name="cat_id">
+    <column id="179" parent="144" name="img">
       <Position>7</Position>
+      <Comment>商品图片</Comment>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="180" parent="144" name="cat_id">
+      <Position>8</Position>
       <Comment>商品类别
 </Comment>
       <DataType>int(11)|0s</DataType>
     </column>
-    <index id="180" parent="144" name="t_produce_pk">
+    <index id="181" parent="144" name="t_produce_pk">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="181" parent="144" name="t_produce_t_produce_cat_id_fk">
+    <index id="182" parent="144" name="t_produce_t_produce_cat_id_fk">
       <ColNames>cat_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="182" parent="144" name="t_produce_pk">
+    <key id="183" parent="144" name="t_produce_pk">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>t_produce_pk</UnderlyingIndexName>
     </key>
-    <foreign-key id="183" parent="144" name="t_produce_t_produce_cat_id_fk">
+    <foreign-key id="184" parent="144" name="t_produce_t_produce_cat_id_fk">
       <ColNames>cat_id</ColNames>
       <RefTableName>t_produce_cat</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="184" parent="145" name="id">
+    <column id="185" parent="145" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="185" parent="145" name="parent_id">
+    <column id="186" parent="145" name="parent_id">
       <Position>2</Position>
       <Comment>父类节点
 </Comment>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="186" parent="145" name="name">
+    <column id="187" parent="145" name="name">
       <Position>3</Position>
       <Comment>类别名称
 </Comment>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="187" parent="145" name="is_parent">
+    <column id="188" parent="145" name="is_parent">
       <Position>4</Position>
       <Comment>是否为父类</Comment>
       <DataType>tinyint(1)|0s</DataType>
     </column>
-    <index id="188" parent="145" name="t_produce_cat_pk">
+    <index id="189" parent="145" name="t_produce_cat_pk">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="189" parent="145" name="t_produce_cat_pk">
+    <key id="190" parent="145" name="t_produce_cat_pk">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>t_produce_cat_pk</UnderlyingIndexName>
     </key>
-    <column id="190" parent="146" name="id">
+    <column id="191" parent="146" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="191" parent="146" name="username">
+    <column id="192" parent="146" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="192" parent="146" name="password">
+    <column id="193" parent="146" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="193" parent="146" name="phone">
+    <column id="194" parent="146" name="phone">
       <Position>4</Position>
       <DataType>varchar(11)|0s</DataType>
     </column>
-    <column id="194" parent="146" name="email">
+    <column id="195" parent="146" name="email">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="195" parent="146" name="PRIMARY">
+    <column id="196" parent="146" name="wx_id">
+      <Position>6</Position>
+      <Comment>微信小程序id</Comment>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <key id="197" parent="146" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

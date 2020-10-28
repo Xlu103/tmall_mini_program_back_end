@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.dao.IProduceDao">
+
+    <resultMap id="produceMap" type="Produce">
+        <id property="id" column="id"/>
+        <result column="title" property="title"/>
+        <result column="detail" property="detail"/>
+        <result column="price" property="price"/>
+        <result column="sales" property="sales"/>
+        <result column="img" property="img"/>
+        <result column="cat_id" property="catId"/>
+    </resultMap>
+
+    <select id="findAllProduce" resultMap="produceMap">
+        select * from t_produce
+    </select>
+
+    <select id="findAllProduceByCat" resultMap="produceMap">
+        select * from t_produce where cat_id=#{catId}
+    </select>
+
+</mapper>

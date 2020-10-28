@@ -39,7 +39,9 @@ public class IUserDaoTest {
 
     @Test
     public void addUser() {
-        User user = new User(-1 , "张三" , "admin" , "123456789" , "zhangsan@11.com");
+        //User user = new User(-1 , "张三" , "admin" , "123456789" , "zhangsan@11.com");
+        // 通过wxId来注册
+        User user = new User("test_wx_id");
         userDao.addUser(user);
     }
 
@@ -62,5 +64,6 @@ public class IUserDaoTest {
         int i = userDao.findUserByName("admin");
         System.out.println(i);
     }
+
 
 }

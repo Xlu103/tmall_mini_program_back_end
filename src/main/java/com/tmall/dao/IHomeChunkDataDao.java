@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @Author Xlu
  * @Date 2020/10/16 12:49
- * @Interface IHomeChunkDataDao
+ * @InterfaceName IHomeChunkDataDao
  * @Version 11
  **/
 @Repository("homeChunkDataDao")

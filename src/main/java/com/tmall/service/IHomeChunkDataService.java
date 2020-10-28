@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @Author Xlu
  * @Date 2020/10/16 19:51
- * @Interface IHomeChunkDataService
+ * @InterfaceName IHomeChunkDataService
  * @Version 11
  **/
 public interface IHomeChunkDataService {

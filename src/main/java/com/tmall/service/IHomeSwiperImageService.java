@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @Author Xlu
  * @Date 2020/10/16 19:53
- * @Interface IHomeSwiperImageService
+ * @InterfaceName IHomeSwiperImageService
  * @Version 11
  **/
 public interface IHomeSwiperImageService {

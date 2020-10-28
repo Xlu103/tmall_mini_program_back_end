@@ -7,10 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+</head>
+<body>
+这是天猫商城后端程序
+<hr>
+<br>
+
+<form action="user/addWxUser" method="post">
+    <input type="text" name="username">
+    <input type="text" name="openid">
+    <input type="submit" value="注册">
+</form>
+</body>
 </html>

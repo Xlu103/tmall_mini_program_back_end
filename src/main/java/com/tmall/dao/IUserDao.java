@@ -44,7 +44,7 @@ public interface IUserDao {
      * @Author Xlu
      * @Date 21:12 2020/10/11
      */
-    int addUser( User user);
+    int addUser(User user);
 
     /**
      * 更改用户信息
@@ -54,7 +54,7 @@ public interface IUserDao {
      * @Author Xlu
      * @Date 21:00 2020/10/11
      */
-    int updateUser( User user);
+    int updateUser(User user);
 
     /**
      * 查询所有用户
@@ -85,4 +85,6 @@ public interface IUserDao {
      * @Date 14:33 2020/10/13
      */
     int findUserByName(@Param("username") String username);
+
+
 }

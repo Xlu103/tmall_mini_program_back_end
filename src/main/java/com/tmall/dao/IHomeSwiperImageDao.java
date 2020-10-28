@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @Author Xlu
  * @Date 2020/10/16 19:43
- * @Interface IHomeSwiperImageDao
+ * @InterfaceName IHomeSwiperImageDao
  * @Version 11
  **/
 @Repository("homeSwiperImageDao")
