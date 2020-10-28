@@ -641,7 +641,7 @@
       <Position>4</Position>
       <Comment>价格
 </Comment>
-      <DataType>int(11)|0s</DataType>
+      <DataType>double|0s</DataType>
     </column>
     <column id="177" parent="144" name="sales">
       <Position>5</Position>

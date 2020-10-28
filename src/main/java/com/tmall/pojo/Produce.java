@@ -24,15 +24,15 @@ public class Produce {
     /**
      * 商品价格
      */
-    private String price;
+    private double price;
     /**
      * 商品销量
      */
-    private String sales;
+    private long sales;
     /**
      * 商品库存
      */
-    private String stock;
+    private long stock;
     /**
      * 商品图片，目前只支持一张图片
      */
@@ -41,6 +41,7 @@ public class Produce {
      * 商品所属类型Id
      */
     private int CatId;
+
 
     public int getId() {
         return id;
@@ -66,27 +67,27 @@ public class Produce {
         this.detail = detail;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getSales() {
+    public long getSales() {
         return sales;
     }
 
-    public void setSales(String sales) {
+    public void setSales(long sales) {
         this.sales = sales;
     }
 
-    public String getStock() {
+    public long getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(long stock) {
         this.stock = stock;
     }
 
@@ -108,13 +109,14 @@ public class Produce {
 
     @Override
     public String toString() {
-        return "Produce{" + "id=" + id + ", title='" + title + '\'' + ", detail='" + detail + '\'' + ", price='" + price + '\'' + ", sales='" + sales + '\'' + ", stock='" + stock + '\'' + ", img='" + img + '\'' + ", CatId=" + CatId + '}';
+        return "Produce{" + "id=" + id + ", title='" + title + '\'' + ", detail='" + detail + '\'' + ", price=" + price + ", " +
+                "sales=" + sales + ", stock=" + stock + ", img='" + img + '\'' + ", CatId=" + CatId + '}';
     }
 
     public Produce() {
     }
 
-    public Produce(int id , String title , String detail , String price , String sales , String stock , String img , int catId) {
+    public Produce(int id , String title , String detail , double price , long sales , long stock , String img , int catId) {
         this.id = id;
         this.title = title;
         this.detail = detail;

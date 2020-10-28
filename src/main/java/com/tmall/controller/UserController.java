@@ -69,7 +69,7 @@ public class UserController {
      * @Author Xlu
      * @Date 16:50 2020/10/24
      */
-    @RequestMapping(value = "/addWxUser",method = RequestMethod.POST)
+    @RequestMapping(value = "/addWxUser", method = RequestMethod.POST)
     public String addWxUser(String username , String openid) {
         Map map = new HashMap(1);
         try {
@@ -92,10 +92,7 @@ public class UserController {
 
         //登录凭证不能为空
         if (code == null || code.length() == 0) {
-            Map map = new HashMap(2);
-            map.put("status" , 0);
-            map.put("message" , "code 不能为空");
-            return JsonUtil.getJsonStr(map);
+            return StaticConst.PARAMETER_NULL_MESSAGE;
         }
 
 
