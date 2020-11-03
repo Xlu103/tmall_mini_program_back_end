@@ -7,12 +7,12 @@ import com.tmall.utils.HttpUtil;
 import com.tmall.utils.JsonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 用户控制层类
@@ -69,8 +69,9 @@ public class UserController {
      * @Author Xlu
      * @Date 16:50 2020/10/24
      */
-    @RequestMapping(value = "/addWxUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/addWxUser")
     public String addWxUser(String username , String openid) {
+        System.out.println("微信用户注册" + "username:" + username + ",openid:" + openid);
         Map map = new HashMap(1);
         try {
             if ("".equals(username) || "".equals(openid)) {
@@ -80,21 +81,20 @@ public class UserController {
             map.put("message" , "success");
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("message" , "success");
+            return StaticConst.PARAMETER_NULL_MESSAGE;
 
         }
 
         return JsonUtil.getJsonStr(map);
     }
 
-    @RequestMapping("/getOpenId")
-    public String getOpenId(String code) {
+    @RequestMapping("/getToken")
+    public String getToken(String code) {
 
         //登录凭证不能为空
         if (code == null || code.length() == 0) {
             return StaticConst.PARAMETER_NULL_MESSAGE;
         }
-
 
         String wxspAppid = StaticConst.WX_APPID;
 
@@ -108,8 +108,56 @@ public class UserController {
         //发送请求
         String sr = HttpUtil.sendGet("https://api.weixin.qq.com/sns/jscode2session" , params);
 
-        System.out.println(sr);
-        return sr;
+        // 格式化返回的字符串
+        WxOpenId wxOpenId = JsonUtil.getString(sr , WxOpenId.class);
+
+        String openid = wxOpenId.getOpenid();
+        String sessionKey = wxOpenId.getSession_key();
+        // 随机生产一个uuid再加上openid和session_key中的一部分字符串
+        String token = UUID.randomUUID().toString() + openid.substring(2 , 7) + sessionKey.substring(2 , 5);
+        return token;
+    }
+
+    /**
+     * 内部类用于格式化请求到的openid
+     *
+     * @Author Xlu
+     * @Date 2020/11/3 22:19
+     * @ClassName WxOpenId
+     * @Version 11
+     **/
+    class WxOpenId {
+        String openid;
+        String session_key;
+
+        WxOpenId() {
+        }
+
+        @Override
+        public String toString() {
+            return "WxOpenId{" + "openid='" + openid + '\'' + ", session_key='" + session_key + '\'' + '}';
+        }
+
+        WxOpenId(String openid , String session_key) {
+            this.openid = openid;
+            this.session_key = session_key;
+        }
+
+        public String getOpenid() {
+            return openid;
+        }
+
+        String getSession_key() {
+            return session_key;
+        }
+
+        void setOpenid(String openid) {
+            this.openid = openid;
+        }
+
+        void setSession_key(String session_key) {
+            this.session_key = session_key;
+        }
     }
 
 

@@ -86,5 +86,14 @@ public interface IUserDao {
      */
     int findUserByName(@Param("username") String username);
 
+    /**
+     * 根据微信id查询用户
+     *
+     * @param wxId 微信id
+     * @return com.tmall.pojo.User
+     * @Author Xlu
+     * @Date 11:16 2020/10/30
+     */
+    User findUserByWxId(@Param("wxId") String wxId);
 
 }

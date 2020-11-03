@@ -30,4 +30,12 @@ public class IProduceDaoTest {
             System.out.println(produce);
         }
     }
+
+    @Test
+    public void findProducesByNameTest() {
+        List<Produce> produces = produceDao.findProducesByName("%盘%");
+        for (Produce produce : produces) {
+            System.out.println(produce);
+        }
+    }
 }

@@ -31,4 +31,26 @@ public interface IProduceService {
      * @Date 17:19 2020/10/28
      */
     List<Produce> findProduceByCatId(int catId);
+
+
+    /**
+     * 根据商品名称模糊搜索商品列表
+     *
+     * @param name 商品名称
+     * @return java.util.List<com.tmall.pojo.Produce> 商品列表
+     * @Author Xlu
+     * @Date 11:12 2020/11/2
+     */
+    List<Produce> findProducesByName(String name);
+
+
+    /**
+     * 根据商品id查询商品
+     *
+     * @param id 用户id
+     * @return com.tmall.pojo.Produce 商品实例
+     * @Author Xlu
+     * @Date 15:11 2020/11/3
+     */
+    Produce findProduceById(int id);
 }

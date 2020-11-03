@@ -54,5 +54,8 @@
         from t_user
         where username = #{username}
     </select>
+    <select id="findUserByWxId" resultMap="userMap">
+        select * from t_user where wx_id=#{wxId}
+    </select>
 
 </mapper>

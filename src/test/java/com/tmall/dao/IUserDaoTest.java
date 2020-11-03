@@ -65,5 +65,11 @@ public class IUserDaoTest {
         System.out.println(i);
     }
 
+    @Test
+    public void findUserByWxIdTest() {
+        User user = userDao.findUserByWxId("zhangsan1");
+        System.out.println(user);
+    }
+
 
 }

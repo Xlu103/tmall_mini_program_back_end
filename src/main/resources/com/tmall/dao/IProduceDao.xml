@@ -21,5 +21,12 @@
     <select id="findAllProduceByCat" resultMap="produceMap">
         select * from t_produce where cat_id=#{catId}
     </select>
+    <!--    /*这里要使用 ${} 进行参数的直接注入*/-->
+    <select id="findProducesByName" resultMap="produceMap">
+        select * from t_produce where detail like  #{name} or title like #{name};
+    </select>
+    <select id="findProduceById" resultMap="produceMap">
+        select * from t_produce where id=#{id}
+    </select>
 
 </mapper>

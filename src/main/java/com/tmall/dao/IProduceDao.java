@@ -40,6 +40,24 @@ public interface IProduceDao {
     List<Produce> findAllProduceByCat(@Param("catId") int catId);
 
 
+    /**
+     * 模糊搜索商品
+     *
+     * @param name 商品名称
+     * @return java.util.List<com.tmall.pojo.Produce>
+     * @Author Xlu
+     * @Date 11:06 2020/11/2
+     */
+    List<Produce> findProducesByName(@Param("name") String name);
 
+    /**
+     * 根据商品id查找商品
+     *
+     * @param id 商品id
+     * @return com.tmall.pojo.Produce
+     * @Author Xlu
+     * @Date 15:10 2020/11/3
+     */
+    Produce findProduceById(@Param("id") int id);
 
 }

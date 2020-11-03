@@ -15,6 +15,7 @@ public class JsonUtil {
     private static ObjectMapper mapper = new ObjectMapper();
 
 
+
     /**
      * 准换为Json字符串
      *
@@ -31,6 +32,25 @@ public class JsonUtil {
             return null;
 
         }
+    }
+
+    /**
+     * 解析json字符串
+     *
+     * @param jsonStr 字符串
+     * @param clazz   类型
+     * @return T
+     * @Author Xlu
+     * @Date 22:09 2020/11/3
+     */
+    public static <T> T getString(String jsonStr , Class<T> clazz) {
+
+        try {
+            return mapper.readValue(jsonStr , clazz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

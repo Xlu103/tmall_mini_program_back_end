@@ -28,4 +28,15 @@ public class ProduceServiceImpl implements IProduceService {
     public List<Produce> findProduceByCatId(int catId) {
         return produceDao.findAllProduceByCat(catId);
     }
+
+    @Override
+    public List<Produce> findProducesByName(String name) {
+        name = "%" + name + "%";
+        return produceDao.findProducesByName(name);
+    }
+
+    @Override
+    public Produce findProduceById(int id) {
+        return produceDao.findProduceById(id);
+    }
 }
