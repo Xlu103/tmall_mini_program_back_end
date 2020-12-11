@@ -34,10 +34,11 @@ public interface IUserService {
      * 添加用户
      *
      * @param user 用户实例
+     * @return int 返回最新的id
      * @Author Xlu
      * @Date 14:03 2020/10/13
      */
-    void addUsers(User user);
+    int addUsers(User user);
 
     /**
      * 根据用户id删除用户
@@ -77,5 +78,15 @@ public interface IUserService {
      * @Date 14:44 2020/10/13
      */
     User findUserByNameAndPassword(String username , String password);
+
+    /**
+     * 根据微信id查询用户
+     *
+     * @param openId 微信id
+     * @return com.tmall.pojo.User
+     * @Author Xlu
+     * @Date 14:17 2020/12/8
+     */
+    User findUserByOpenId(String openId);
 
 }

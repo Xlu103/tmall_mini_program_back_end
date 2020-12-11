@@ -32,10 +32,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void addUsers(User user) {
+    public int addUsers(User user) {
         // 使用md5加密后的作为密码
         user.setPassword(Md5Util.getMD5(user.getPassword() , user.getUsername()));
-        userDao.addUser(user);
+       return  userDao.addUser(user);
     }
 
     @Override
@@ -65,4 +65,8 @@ public class UserServiceImpl implements IUserService {
         return userDao.findUserByNameAndPassword(username , password);
     }
 
+    @Override
+    public User findUserByOpenId(String openId) {
+        return userDao.findUserByWxId(openId);
+    }
 }

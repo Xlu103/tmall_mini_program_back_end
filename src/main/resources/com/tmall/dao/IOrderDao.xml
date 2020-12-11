@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.dao.IOrderDao">
+    <resultMap id="BaseResultMap" type="com.tmall.pojo.Order">
+        <id column="t_order_order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="t_order_user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="t_order_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="t_order_status" jdbcType="INTEGER" property="status"/>
+        <result column="t_order_price" jdbcType="DOUBLE" property="price"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    t_order.order_id as t_order_order_id, t_order.user_id as t_order_user_id, t_order.create_time as t_order_create_time,
+    t_order.`status` as `t_order_status`, t_order.price as t_order_price
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order t_order
+        where t_order.order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectListByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order t_order
+        where t_order.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" keyColumn="order_id" keyProperty="order_id" parameterType="com.tmall.pojo.Order" useGeneratedKeys="true">
+    insert into t_order (order_id,user_id, create_time, `status`,
+      price)
+    values (#{orderId,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER},
+      #{price,jdbcType=DOUBLE})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.tmall.pojo.Order">
+    update t_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -7,6 +7,7 @@ import com.tmall.utils.HttpUtil;
 import com.tmall.utils.JsonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -62,6 +63,13 @@ public class UserController {
 
     /**
      * 通过微信openid和微信名注册用户
+     * 如果用户已经注册，就将用户的信息返回
+     * <p>
+     * 登录和注册的时候都调用这个接口
+     * 每一次登录注册的时候，先查看ope
+     * 如果没有被注册，就使用openid
+     * 如果注册过，就也将用户的id返回
+     * 用户的id用于后续的请求都需要
      *
      * @param username 微信名
      * @param openid   微信中的openid
@@ -72,34 +80,51 @@ public class UserController {
     @RequestMapping(value = "/addWxUser")
     public String addWxUser(String username , String openid) {
         System.out.println("微信用户注册" + "username:" + username + ",openid:" + openid);
-        Map map = new HashMap(1);
+        Map map = new HashMap(2);
+
         try {
             if ("".equals(username) || "".equals(openid)) {
                 throw new Exception("注册微信用户需要用户名和用户openid");
             }
-            userService.addUsers(new User(username , openid));
+            // 根据openid查询用户，如果查找到了，就不用再注册了，不然会由于openid的唯一性而抛出异常
+            User user = userService.findUserByOpenId(openid);
+
+            // 如果用户为空，就将注册用户
+            if (user == null) {
+                user = new User();
+                user.setUsername(username);
+                user.setWxId(openid);
+                userService.addUsers(user);
+            }
             map.put("message" , "success");
+            map.put("userId" , user.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return StaticConst.PARAMETER_NULL_MESSAGE;
-
         }
 
         return JsonUtil.getJsonStr(map);
     }
 
-    @RequestMapping("/getToken")
+    /**
+     * 获取微信Token接口
+     * http://172.16.80.145:8080/tmall/user/getToken
+     *
+     * @param code 微信传过来的code
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 9:34 2020/11/4
+     */
+    @RequestMapping(value = "/getToken", method = RequestMethod.POST)
     public String getToken(String code) {
 
         //登录凭证不能为空
         if (code == null || code.length() == 0) {
             return StaticConst.PARAMETER_NULL_MESSAGE;
         }
-
+        // 静态常量
         String wxspAppid = StaticConst.WX_APPID;
-
         String wxspSecret = StaticConst.WX_SECRET;
-
         String grant_type = StaticConst.GRANT_TYPE;
 
         //1、向微信服务器 使用登录凭证 code 获取 session_key 和 openid
@@ -109,13 +134,27 @@ public class UserController {
         String sr = HttpUtil.sendGet("https://api.weixin.qq.com/sns/jscode2session" , params);
 
         // 格式化返回的字符串
-        WxOpenId wxOpenId = JsonUtil.getString(sr , WxOpenId.class);
-
+        WxOpenId wxOpenId = null;
+        try {
+            wxOpenId = JsonUtil.getString(sr , WxOpenId.class);
+        } catch (Exception e) {
+            return sr;
+        }
+        if (wxOpenId == null) {
+            return sr;
+        }
         String openid = wxOpenId.getOpenid();
+
         String sessionKey = wxOpenId.getSession_key();
         // 随机生产一个uuid再加上openid和session_key中的一部分字符串
         String token = UUID.randomUUID().toString() + openid.substring(2 , 7) + sessionKey.substring(2 , 5);
-        return token;
+        Map map = new HashMap(1);
+        //map.put("token" , token);
+
+
+        // 不考虑安全问题，直接将openid返回
+        map.put("token" , openid);
+        return JsonUtil.getJsonStr(map);
     }
 
     /**
@@ -126,7 +165,7 @@ public class UserController {
      * @ClassName WxOpenId
      * @Version 11
      **/
-    class WxOpenId {
+    static class WxOpenId {
         String openid;
         String session_key;
 

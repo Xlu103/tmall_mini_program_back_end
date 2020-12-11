@@ -40,7 +40,7 @@ public interface IUserDao {
      * 添加用户
      *
      * @param user 用户实例
-     * @return int
+     * @return int 返回这一条记录的id
      * @Author Xlu
      * @Date 21:12 2020/10/11
      */
@@ -95,5 +95,6 @@ public interface IUserDao {
      * @Date 11:16 2020/10/30
      */
     User findUserByWxId(@Param("wxId") String wxId);
+
 
 }

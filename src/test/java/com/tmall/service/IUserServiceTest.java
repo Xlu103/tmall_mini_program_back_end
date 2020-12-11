@@ -33,7 +33,7 @@ public class IUserServiceTest {
 
     @Test
     public void addUsers() {
-        User user = new User(-1 , "admin" , "admin"  , "123456789" , "zhangsan@11.com");
+        User user = new User(-1 , "admin" , "admin" , "123456789" , "zhangsan@11.com");
         userService.addUsers(user);
     }
 
@@ -44,7 +44,7 @@ public class IUserServiceTest {
 
     @Test
     public void updateUser() {
-        User user = new User(3 , "张三" , "11"  , "123456789" , "zhangsan@11.com");
+        User user = new User(3 , "张三" , "11" , "123456789" , "zhangsan@11.com");
         userService.updateUser(user);
     }
 
@@ -60,5 +60,14 @@ public class IUserServiceTest {
         System.out.println(result);
     }
 
+    @Test
+    public void testAddUsers() {
+        User user = new User();
+        user.setUsername("admin3");
+        user.setPassword("admin3");
+        user.setWxId("121212211");
+        int result = userService.addUsers(user);
+        System.out.println(user.getId());
+    }
 
 }

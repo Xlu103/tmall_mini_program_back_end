@@ -29,8 +29,6 @@ public class IUserDaoTest {
 
     @Test
     public void updateUser() {
-
-
         // 使用动态加密盐的只需要在注册用户的时候将第二个参数换成用户名即可
         User user = new User(-1 , "张三" , "admin" , "123456789" , "zhangsan@11.com");
         userDao.updateUser(user);
@@ -72,4 +70,9 @@ public class IUserDaoTest {
     }
 
 
+    @Test
+    public void findUserByWxId() {
+        User user=userDao.findUserByWxId("12121221");
+        System.out.println(user);
+    }
 }

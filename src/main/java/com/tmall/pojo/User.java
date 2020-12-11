@@ -69,6 +69,9 @@ public class User implements Serializable {
     }
 
     public String getPassword() {
+        if (this.password == null) {
+            this.password = "";
+        }
         return password;
     }
 

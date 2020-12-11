@@ -13,7 +13,7 @@
         <result property="wxId" column="wx_id"></result>
     </resultMap>
 
-    <insert id="addUser" parameterType="User">
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         insert into t_user(username, password, phone, email, wx_id)
         values (#{username}, #{password}, #{phone}, #{email}, #{wxId})
     </insert>
