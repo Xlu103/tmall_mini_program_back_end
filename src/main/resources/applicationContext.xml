@@ -29,7 +29,7 @@
     <!--1 配置连接池-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://101.200.80.176:3306/tmall_mini_program?characterEncoding=utf-8"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/tmall_mini_program?characterEncoding=utf-8&amp;serverTimezone=UTC&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>

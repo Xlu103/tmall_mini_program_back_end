@@ -1,6 +1,7 @@
 package com.tmall.service.impl;
 
 import com.tmall.dao.IOrderDao;
+import com.tmall.dao.IOrderItemDao;
 import com.tmall.pojo.Order;
 import com.tmall.service.IOrderService;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,16 @@ public class OrderServiceImpl implements IOrderService {
     @Resource(name = "orderDao")
     IOrderDao orderDao;
 
+    @Resource(name = "orderItemDao")
+    IOrderItemDao orderItemDao;
+
     @Override
     public List<Order> findListByUserId(Integer userId) {
-        return orderDao.selectListByUserId(userId);
+        List<Order> orders = orderDao.selectListByUserId(userId);
+        for (Order order : orders) {
+            order.setOrderItems(orderItemDao.selectAllByOrderId(order.getOrderId()));
+        }
+        return orders;
     }
 
     @Override
@@ -36,8 +44,12 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public int deleteById(String orderId) {
-        return orderDao.deleteByPrimaryKey(orderId);
+        orderItemDao.deleteAllByOrderId(orderId);
+        int i = orderDao.deleteByPrimaryKey(orderId);
+
+        return i;
     }
+
 
     @Override
     public int update(Order order) {

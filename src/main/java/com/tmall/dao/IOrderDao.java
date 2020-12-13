@@ -1,6 +1,7 @@
 package com.tmall.dao;
 
 import com.tmall.pojo.Order;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -72,4 +73,14 @@ public interface IOrderDao {
      * @Date 18:12 2020/12/11
      */
     int updateByPrimaryKey(Order order);
+/**
+ *
+ * 根据订单的状态查询订单列表
+ * @Author Xlu
+ * @Date 16:39 2020/12/12
+ * @param  status 订单状态
+ * @param userId 用户id
+ * @return java.util.List<com.tmall.pojo.Order>
+*/
+    List<Order> selectListByStatus(@Param("status") Integer status, @Param("userId") Integer userId);
 }

@@ -17,7 +17,7 @@
         <spring.version>5.2.0.RELEASE</spring.version>
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.12</log4j.version>
-        <mysql.version>5.1.9</mysql.version>
+        <mysql.version>8.0.11</mysql.version>
         <mybatis.version>3.4.6</mybatis.version>
     </properties>
 
@@ -153,6 +153,24 @@
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
         </dependency>
+
+
+
+        <!-- https://mvnrepository.com/artifact/cn.smallbun.screw/screw-core -->
+        <dependency>
+            <groupId>cn.smallbun.screw</groupId>
+            <artifactId>screw-core</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.4.5</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -188,6 +206,58 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>cn.smallbun.screw</groupId>
+                    <artifactId>screw-maven-plugin</artifactId>
+                    <version>1.0.5</version>
+                    <dependencies>
+                        <!-- HikariCP -->
+                        <dependency>
+                            <groupId>com.zaxxer</groupId>
+                            <artifactId>HikariCP</artifactId>
+                            <version>3.4.5</version>
+                        </dependency>
+                        <!--mysql driver-->
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <version>5.1.9</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <!--username-->
+                        <username>root</username>
+                        <!--password-->
+                        <password>root</password>
+                        <!--driver-->
+                        <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                        <!--jdbc url-->
+                        <jdbcUrl>jdbc:mysql://101.200.80.176:3306/tmall_mini_program?serverTimezone=Asia/Shanghai</jdbcUrl>
+                        <!--生成文件类型-->
+                        <fileType>HTML</fileType>
+                        <!--打开文件输出目录-->
+                        <openOutputDir>false</openOutputDir>
+                        <!--生成模板-->
+                        <produceType>freemarker</produceType>
+                        <!--文档名称 为空时:将采用[数据库名称-描述-版本号]作为文档名称-->
+                        <fileName>测试文档名称</fileName>
+                        <!--描述-->
+                        <description>数据库文档生成</description>
+                        <!--版本-->
+                        <version>1.0.0</version>
+                        <!--标题-->
+                        <title>tmall_mini</title>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
