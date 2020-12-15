@@ -21,6 +21,7 @@
     <!--配置内部资源解析器,用于跳转页面-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="suffix" value=".jsp"/>
+
         <property name="prefix" value="/pages/"/>
     </bean>
     <!-- 文件上传配置 -->
@@ -53,6 +54,7 @@
     <!-- 这里的斜杆需要注意！！！！，缺一不可 -->
     <mvc:resources mapping="/static/img/**" location="/static/img/"/>
     <mvc:resources mapping="/static/js/**" location="/static/js/"/>
+    <mvc:resources mapping="/static/fonts/**" location="/static/fonts/"/>
     <mvc:resources mapping="/static/css/**" location="/static/css/"/>
     <mvc:resources mapping="/static/video/**" location="/static/video/"/>
 

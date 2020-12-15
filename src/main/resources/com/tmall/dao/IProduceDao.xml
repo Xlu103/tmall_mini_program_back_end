@@ -14,19 +14,74 @@
         <result column="cat_id" property="catId"/>
     </resultMap>
 
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.tmall.pojo.Produce" useGeneratedKeys="true">
+        insert into t_produce (title, detail, price, stock, img)
+        values (#{title,jdbcType=VARCHAR},
+                #{detail,jdbcType=VARCHAR},
+                #{price,jdbcType=DOUBLE},
+                #{stock,jdbcType=INTEGER},
+                #{img,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateById" parameterType="com.tmall.pojo.Produce">
+        update t_produce
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="sales != null">
+                sales = #{sales,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+
+            <if test="catId != null">
+                cat_id = #{catId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
     <select id="findAllProduce" resultMap="produceMap">
-        select * from t_produce
+        select *
+        from t_produce
     </select>
 
     <select id="findAllProduceByCat" resultMap="produceMap">
-        select * from t_produce where cat_id=#{catId}
+        select *
+        from t_produce
+        where cat_id = #{catId}
     </select>
     <!--    /*这里要使用 ${} 进行参数的直接注入*/-->
     <select id="findProducesByName" resultMap="produceMap">
-        select * from t_produce where detail like  #{name} or title like #{name};
+        select *
+        from t_produce
+        where detail like #{name}
+           or title like #{name};
     </select>
     <select id="findProduceById" resultMap="produceMap">
-        select * from t_produce where id=#{id}
+        select *
+        from t_produce
+        where id = #{id}
     </select>
+
+    <select id="selectByPage" resultMap="produceMap">
+        select *
+        from t_produce
+        limit #{jump},#{pageSize}
+    </select>
+
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        select count(*)
+        from t_produce
+    </select>
+
 
 </mapper>

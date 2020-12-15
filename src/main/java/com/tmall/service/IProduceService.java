@@ -1,5 +1,6 @@
 package com.tmall.service;
 
+import com.tmall.pojo.Page;
 import com.tmall.pojo.Produce;
 
 import java.util.List;
@@ -53,4 +54,35 @@ public interface IProduceService {
      * @Date 15:11 2020/11/3
      */
     Produce findProduceById(int id);
+
+    /**
+     * 根据页面大小和第几页查询信息
+     *
+     * @param pageNo   第几页
+     * @param pageSize 页面大小
+     * @return java.util.List<com.tmall.pojo.Page> 这一页的页面
+     * @Author Xlu
+     * @Date 19:16 2020/12/14
+     */
+    Page<Produce> findPageSizeAndPageNo(int pageNo , int pageSize);
+
+    /**
+     *
+     * 添加商品
+     * @Author Xlu
+     * @Date 20:04 2020/12/14
+     * @param produce  商品
+     * @return int
+    */
+    int add(Produce produce);
+
+    /**
+     *
+     * 修改商品信息
+     * @Author Xlu
+     * @Date 20:07 2020/12/14
+     * @param produce 商品
+     * @return void
+    */
+    void update(Produce produce);
 }

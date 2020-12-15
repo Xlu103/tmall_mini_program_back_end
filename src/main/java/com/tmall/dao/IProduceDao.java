@@ -60,4 +60,43 @@ public interface IProduceDao {
      */
     Produce findProduceById(@Param("id") int id);
 
+    /**
+     * 添加商品
+     *
+     * @param produce 商品
+     * @return int
+     * @Author Xlu
+     * @Date 10:10 2020/12/14
+     */
+    int insert(Produce produce);
+
+    /**
+     * 根据每一页大小，第几页查询到当前的第几页
+     *
+     * @param jump     跳过多少
+     * @param pageSize 每一页多长
+     * @return java.util.List<com.tmall.pojo.Produce> 返回这一页的商品列表
+     * @Author Xlu
+     * @Date 10:12 2020-07-27
+     */
+    List<Produce> selectByPage(@Param("jump") int jump , @Param("pageSize") int pageSize);
+
+    /**
+     * 查询总条数
+     *
+     * @return int
+     * @Author Xlu
+     * @Date 19:19 2020/12/14
+     */
+    int selectTotalCount();
+
+    /**
+     * 根据商品id修改商品信息
+     *
+     * @param produce 商品
+     * @return void
+     * @Author Xlu
+     * @Date 20:08 2020/12/14
+     */
+    void updateById(Produce produce);
 }

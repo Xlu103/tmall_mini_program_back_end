@@ -38,4 +38,17 @@ public class IProduceDaoTest {
             System.out.println(produce);
         }
     }
+
+    @Test
+    public void insert() {
+        Produce produce = new Produce();
+        produce.setTitle("test2");
+        produce.setPrice(22);
+        produce.setImg("/tmall/static/img/produce_2.jpg");
+        produce.setDetail("test2222");
+        produce.setStock(222);
+        produceDao.insert(produce);
+
+        System.out.println(produce);
+    }
 }

@@ -1,5 +1,6 @@
 package com.tmall.service;
 
+import com.tmall.pojo.Page;
 import com.tmall.pojo.Produce;
 import com.tmall.utils.JsonUtil;
 import org.junit.Test;
@@ -38,5 +39,11 @@ public class IProduceServiceTest {
         for (Produce produce : produces) {
             System.out.println(produce);
         }
+    }
+
+    @Test
+    public void findPageSizeAndPageNo() {
+        Page<Produce> page = produceService.findPageSizeAndPageNo(1 , 4);
+        System.out.println(page);
     }
 }

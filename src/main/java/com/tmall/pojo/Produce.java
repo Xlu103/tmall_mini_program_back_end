@@ -87,11 +87,22 @@ public class Produce {
         return stock;
     }
 
+    /**
+     * 设置库存
+     *
+     * @param stock 库存
+     * @return void
+     * @Author Xlu
+     * @Date 10:19 2020/12/14
+     */
     public void setStock(long stock) {
         this.stock = stock;
     }
 
     public String getImg() {
+        if (img == null) {
+            img = "/tmall/static/img/default.jpg";
+        }
         return img;
     }
 
@@ -109,8 +120,7 @@ public class Produce {
 
     @Override
     public String toString() {
-        return "Produce{" + "id=" + id + ", title='" + title + '\'' + ", detail='" + detail + '\'' + ", price=" + price + ", " +
-                "sales=" + sales + ", stock=" + stock + ", img='" + img + '\'' + ", CatId=" + CatId + '}';
+        return "Produce{" + "id=" + id + ", title='" + title + '\'' + ", detail='" + detail + '\'' + ", price=" + price + ", " + "sales=" + sales + ", stock=" + stock + ", img='" + img + '\'' + ", CatId=" + CatId + '}';
     }
 
     public Produce() {
