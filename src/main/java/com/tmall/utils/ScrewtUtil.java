@@ -8,29 +8,32 @@ import cn.smallbun.screw.core.execute.DocumentationExecute;
 import cn.smallbun.screw.core.process.ProcessConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.junit.Test;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 
 
 /**
- * @ClassName: OutSqlDocTest
+ * @ClassName: ScrewtUtil
  * @Author: Xlu
  * @Date: 2020/12/13 11:28
  * @Version 11
  **/
-public class OutSqlDocTest {
+public class ScrewtUtil {
+
+    public static void main(String[] args) {
+        documentGeneration("jdbc:mysql://127.0.0.1:3306/tmall_mini_program?characterEncoding=utf-8&serverTimezone=UTC");
+    }
+
     /**
      * 文档生成
      */
-    @Test
-    public void documentGeneration() {
+    public static void documentGeneration(String url) {
 
         //数据源
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/blog_db?characterEncoding=utf-8&serverTimezone=UTC");
+        hikariConfig.setJdbcUrl(url);
         hikariConfig.setUsername("root");
         hikariConfig.setPassword("root");
         //设置可以获取tables remarks信息
@@ -47,11 +50,11 @@ public class OutSqlDocTest {
                 //打开目录
                 .openOutputDir(true)
                 //文件类型
-                .fileType(EngineFileType.WORD)
+                .fileType(EngineFileType.MD)
                 //生成模板实现
                 .produceType(EngineTemplateType.freemarker)
                 //自定义文件名称
-                .fileName("blog_db").build();
+                .fileName("tmall_mini_program").build();
 
 
         ProcessConfig processConfig = ProcessConfig.builder()
@@ -65,9 +68,9 @@ public class OutSqlDocTest {
         //配置
         Configuration config = Configuration.builder()
                 //版本
-                .version("1.0.0")
+                .version("1.0.1")
                 //描述
-                .description("blog_db")
+                .description("tmall_mini_program")
                 //数据源
                 .dataSource(dataSource)
                 //生成配置
