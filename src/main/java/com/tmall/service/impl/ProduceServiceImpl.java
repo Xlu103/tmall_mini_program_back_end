@@ -82,4 +82,15 @@ public class ProduceServiceImpl implements IProduceService {
     public void update(Produce produce) {
         produceDao.updateById(produce);
     }
+
+    @Override
+    public List<Produce> findRecommend() {
+        return produceDao.selectCommend();
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+
+        produceDao.deleteById(id);
+    }
 }

@@ -46,4 +46,9 @@ public class IProduceServiceTest {
         Page<Produce> page = produceService.findPageSizeAndPageNo(1 , 4);
         System.out.println(page);
     }
+
+    @Test
+    public void deleteById() {
+        produceService.deleteById(17);
+    }
 }

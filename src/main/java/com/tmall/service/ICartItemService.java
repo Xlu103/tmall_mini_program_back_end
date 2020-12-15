@@ -23,6 +23,18 @@ public interface ICartItemService {
      */
     int deleteItemById(Integer id);
 
+
+    /**
+     *
+     * 在结账的时候删除购物车项
+     * @Author Xlu
+     * @Date 16:43 2020/12/15
+     * @param id 购物车项id
+     * @return int
+    */
+    public int deleteItemByIdSettle(Integer id) ;
+
+
     /**
      * 更改购物车项，一般这里就是更改购物车项的count
      *
@@ -41,6 +53,9 @@ public interface ICartItemService {
      * @Author Xlu
      * @Date 15:06 2020/12/8
      */
+
+
+
     List<CartItem> findItemsByUserId(Integer userId);
 
     /**
@@ -53,6 +68,7 @@ public interface ICartItemService {
      * @Date 15:05 2020/12/8
      */
     int addItem(CartItem item);
+
 
     /**
      * 根据用户id删除所有购物车项

@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
+ * 由于后台管理功能比较薄弱，代码量较少
+ * 所以将所有后端操作的方法，都放到这个管理类里面,没有系分开
+ *
  * @ClassName: ManagerController
  * @Author: Xlu
  * @Date: 2020/12/12 16:57
@@ -129,15 +132,14 @@ public class ManagerController {
         produce.setPrice(price);
         produce.setDetail(detail);
 
-        produceService.add(produce);
-
-        int id = produce.getId();
-
         System.out.println("fileName" + fileName);
 
+        System.out.println(fileName);
         produce.setImg("/tmall/static/img/" + fileName);
 
-        produceService.update(produce);
+        // 
+        produceService.add(produce);
+
         // 将商品列表放进去
         Page<Produce> page = produceService.findPageSizeAndPageNo(0 , 5);
         session.setAttribute("page" , page);
@@ -145,6 +147,16 @@ public class ManagerController {
         return "redirect:/pages/manager/goodsManage/goods_list.jsp";
     }
 
+    /**
+     * 选择页面，分页中的跳转
+     *
+     * @param pageNo
+     * @param pageSize
+     * @param session
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 16:00 2020/12/15
+     */
     @RequestMapping("/selectPage")
     public String selectPage(int pageNo , int pageSize , HttpSession session) {
         // 将商品列表放进去
@@ -155,6 +167,16 @@ public class ManagerController {
     }
 
 
+    /**
+     * 选择商品的id，这里跳转到修改页面
+     *
+     * @param produceId
+     * @param session
+     * @param req
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 15:59 2020/12/15
+     */
     @RequestMapping("/selectProduceById")
     public String selectProduceById(Integer produceId , HttpSession session , HttpServletRequest req) {
         Produce produce = produceService.findProduceById(produceId);
@@ -165,6 +187,15 @@ public class ManagerController {
         return "redirect:/pages/manager/goodsManage/goods_update.jsp";
     }
 
+    /**
+     * 更改商品信息的跳转
+     *
+     * @param produce
+     * @param session
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 15:59 2020/12/15
+     */
     @RequestMapping("/updateProduce")
     public String updateProduce(Produce produce , HttpSession session) {
         produceService.update(produce);
@@ -175,13 +206,40 @@ public class ManagerController {
         return "redirect:/pages/manager/goodsManage/goods_list.jsp";
     }
 
+    /**
+     * 关闭修改的跳转
+     *
+     * @param session
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 15:59 2020/12/15
+     */
     @RequestMapping("/cancelUpdateProduce")
-    public String cancelUpdateProduce(HttpSession session){
+    public String cancelUpdateProduce(HttpSession session) {
         Page<Produce> page = produceService.findPageSizeAndPageNo(0 , 5);
         session.setAttribute("page" , page);
 
         return "redirect:/pages/manager/goodsManage/goods_list.jsp";
     }
 
+    /**
+     * 根据id删除商品
+     *
+     * @param session 会话
+     * @param id      商品id
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 19:23 2020/12/15
+     */
+    @RequestMapping("/deleteProduce")
+    public String deleteProduce(HttpSession session , Integer id,Integer pageNo) {
+
+        produceService.deleteById(id);
+
+        Page<Produce> page = produceService.findPageSizeAndPageNo(0 , 5);
+        session.setAttribute("page" , page);
+
+        return "redirect:/pages/manager/goodsManage/goods_list.jsp";
+    }
 
 }

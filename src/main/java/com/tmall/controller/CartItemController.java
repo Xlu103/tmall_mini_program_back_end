@@ -96,6 +96,26 @@ public class CartItemController {
 
 
     /**
+     * 根据购物车项的id删除购物车
+     *
+     * @param item 购物车项
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 15:36 2020/12/8
+     */
+    @RequestMapping("/deleteSettle")
+    public String deleteItemByIdSettle(CartItem item) {
+        HashMap<String, Object> map = new HashMap<>();
+        if (item == null || item.getId() == null) {
+            // 如果参数不对，就返回一个参数错误
+            return StaticConst.PARAMETER_NULL_MESSAGE;
+        }
+        cartItemService.deleteItemByIdSettle(item.getId());
+        map.put("message" , "success");
+        return JsonUtil.getJsonStr(map);
+    }
+
+    /**
      * 删除所有项
      *
      * @param
@@ -146,5 +166,6 @@ public class CartItemController {
         map.put("produces" , produces);
         return JsonUtil.getJsonStr(map);
     }
+
 
 }

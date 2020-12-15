@@ -44,6 +44,27 @@ public class ProduceController {
         for (Produce produce : produces) {
             produce.setImg("http://" + req.getServerName() + ":8080" + produce.getImg());
         }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("message" , "success");
+        map.put("produceList" , produces);
+
+        return JsonUtil.getJsonStr(map);
+    }
+
+
+    /**
+     * 查询所有商品数据
+     *
+     * @return java.lang.String
+     * @Author Xlu
+     * @Date 21:27 2020/10/28
+     */
+    @RequestMapping("/recommend")
+    String getRecommend(HttpServletRequest req) {
+        List<Produce> produces = produceService.findRecommend();
+        for (Produce produce : produces) {
+            produce.setImg("http://" + req.getServerName() + ":8080" + produce.getImg());
+        }
         List<Produce> pLeft = new ArrayList<>();
         List<Produce> pRight = new ArrayList<>();
 
@@ -122,7 +143,6 @@ public class ProduceController {
 
         Produce produce = produceService.findProduceById(id);
         produce.setImg("http://" + req.getServerName() + ":8080" + produce.getImg());
-
         return JsonUtil.getJsonStr(produce);
     }
 

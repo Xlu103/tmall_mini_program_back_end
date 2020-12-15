@@ -67,22 +67,39 @@ public interface IProduceService {
     Page<Produce> findPageSizeAndPageNo(int pageNo , int pageSize);
 
     /**
-     *
      * 添加商品
+     *
+     * @param produce 商品
+     * @return int
      * @Author Xlu
      * @Date 20:04 2020/12/14
-     * @param produce  商品
-     * @return int
-    */
+     */
     int add(Produce produce);
 
     /**
-     *
      * 修改商品信息
-     * @Author Xlu
-     * @Date 20:07 2020/12/14
+     *
      * @param produce 商品
      * @return void
-    */
+     * @Author Xlu
+     * @Date 20:07 2020/12/14
+     */
     void update(Produce produce);
+
+    /**
+     * 得到推荐的商品
+     *
+     * @return 商品列表
+     */
+    List<Produce> findRecommend();
+
+    /**
+     *
+     * 根据id删除商品
+     * @Author Xlu
+     * @Date 19:24 2020/12/15
+     * @param id  商品id
+     * @return void
+    */
+    void deleteById(Integer id);
 }

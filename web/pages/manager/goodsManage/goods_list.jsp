@@ -95,13 +95,25 @@
                     <td>${item.stock}</td>
                     <td>${item.sales}</td>
                     <td>
-                        <button class="layui-btn  " type="submit">修改</button>
+                        <button class="layui-btn" type="submit">修改</button>
+                        <button type="button" class="layui-btn" name="del-btn" value="${item.id}" produceName="${item.title}">删除</button>
                     </td>
                 </tr>
             </form>
         </c:forEach>
         </tbody>
     </table>
+    <script>
+        $(function () {
+            $("button[name='del-btn']").click(function () {
+                if (confirm("你确定要删除【"+$(this).attr("produceName")+"】？"))
+                window.location ="http://127.16.80.145:8080"+"${pageContext.request.contextPath}/manager/deleteProduce?id="+this.value+"&pageNo="+${page.pageNo};
+
+            })
+
+
+        });
+    </script>
 
     <form action="${pageContext.request.contextPath}/manager/selectPage" id="selectPageForm">
         <input type="hidden" name="pageNo" id="pageNo">
@@ -130,33 +142,13 @@
                         $("#pageSize").val(pageSize);
                         $("#selectPageForm")[0].submit();
                     }
-
                 }
             });
         });
 
-
-    /*    //修改按钮
-        var updateFrame = null;
-
-        function updateBut() {
-            // 本来这里是弹出一个框，现在变成跳转了
-            /!*   layui.use('layer', function () {
-                   var layer = layui.layer;
-                   //iframe层-父子操作
-                   updateFrame = layer.open({
-                       title: "商品信息修改",
-                       type: 2,
-                       area: ['70%', '60%'],
-                       scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
-                       maxmin: true,
-                       content: 'goods_update.jsp'
-                   });
-               });*!/
-
-
-        }*/
     </script>
+
+
 </div>
 </body>
 

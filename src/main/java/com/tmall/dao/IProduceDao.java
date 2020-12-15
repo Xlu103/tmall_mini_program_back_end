@@ -99,4 +99,24 @@ public interface IProduceDao {
      * @Date 20:08 2020/12/14
      */
     void updateById(Produce produce);
+
+    /**
+     * 得到推荐的商品
+     *
+     * @return java.util.List<com.tmall.pojo.Produce>
+     * @Author Xlu
+     * @Date 16:06 2020/12/15
+     */
+    List<Produce> selectCommend();
+
+    /**
+     *
+     * 根据商品的id删除商品
+     *
+     * @Author Xlu
+     * @Date 19:24 2020/12/15
+     * @param id
+     * @return void
+    */
+    void deleteById(Integer id);
 }
